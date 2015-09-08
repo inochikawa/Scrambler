@@ -24,21 +24,11 @@ namespace Scrambler.Cyphers
                 key = key % alphabet.Quantity;
             foreach (var letter in text)
             {
-                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
-                    if (char.IsUpper(letter))
-                    {
-                        if (alphabet.UpperCase.IndexOf(letter) - key < 0)
-                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) - key + alphabet.Quantity]);
-                        else
-                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) - key]);
-                    }
+                if (alphabet.Letters.Contains(letter))
+                    if (alphabet.Letters.IndexOf(letter) - key < 0)
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) - key + alphabet.Quantity]);
                     else
-                    {
-                        if (alphabet.LowerCase.IndexOf(letter) - key < 0)
-                            result.Append(alphabet.LowerCase[alphabet.LowerCase.IndexOf(letter) - key + alphabet.Quantity]);
-                        else
-                            result.Append(alphabet.LowerCase[alphabet.LowerCase.IndexOf(letter) - key]);
-                    }
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) - key]);
                 else
                     result.Append(letter);
             }
@@ -52,21 +42,12 @@ namespace Scrambler.Cyphers
                 key = key % alphabet.Quantity;
             foreach (var letter in text)
             {
-                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
-                    if(char.IsUpper(letter))
-                    {
-                        if (alphabet.UpperCase.IndexOf(letter) + key > alphabet.Quantity - 1)
-                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) + key - alphabet.Quantity]);
-                        else
-                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) + key]);
-                    }
+                if (alphabet.Letters.Contains(letter))
+
+                    if (alphabet.Letters.IndexOf(letter) + key > alphabet.Quantity - 1)
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) + key - alphabet.Quantity]);
                     else
-                    {
-                        if (alphabet.LowerCase.IndexOf(letter) + key > alphabet.Quantity - 1)
-                            result.Append(alphabet.LowerCase[ alphabet.LowerCase.IndexOf(letter) + key - alphabet.Quantity]);
-                        else
-                            result.Append(alphabet.LowerCase[alphabet.LowerCase.IndexOf(letter) + key]);
-                    }
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) + key]);                  
                 else
                     result.Append(letter);
             }

@@ -8,9 +8,10 @@ namespace Scrambler.Alphabets
 {
     public class Roman: Alphabet
     {        
-        public Roman()
+        public Roman(string a, string b):base(a,b)
         {
-            Quantity = 23;
+            Letters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,.";
+            Quantity = Letters.Length;
         }
     }
 }

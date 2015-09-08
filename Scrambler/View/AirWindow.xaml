@@ -16,35 +16,35 @@
                                 Width="auto" 
                                 Height="auto" 
                                 BorderBrush="LightGray"
-                                CornerRadius="5" 
+                                CornerRadius="2" 
                                 BorderThickness="1" 
                                 Background="{TemplateBinding Background}"/>
                         <Border x:Name="borderMain" 
                                 Width="auto" 
                                 Height="auto" 
-                                BorderBrush="#554d35"
-                                CornerRadius="5" 
-                                BorderThickness="2"
+                                BorderBrush="#ffae00"
+                                CornerRadius="2" 
+                                BorderThickness="1"
                                 >
                             <DockPanel LastChildFill="True">
 
                                 <!--PART_TITLEBAR-->
                                 <Border x:Name="TopBar"  
                                         Height="45" 
-                                        BorderBrush="#746844"
-                                        CornerRadius="5,5,0,0" 
-                                        BorderThickness="0" 
-                                        Background="#FFFBFBFB"  
+                                        BorderBrush="#ffae00"
+                                        CornerRadius="2,2,0,0" 
+                                        BorderThickness="0,0,0,0" 
+                                        Background="#ffffff"  
                                         HorizontalAlignment="Stretch" 
                                         DockPanel.Dock="Top" 
                                         MouseDown="TopBar_MouseDown"
                                         >
                                     <Grid>
-                                        <Border Height="30" 
-                                                BorderBrush="#746844"
-                                                CornerRadius="5,5,0,0" 
+                                        <Border Height="40" 
+                                                BorderBrush="#ffae00"
+                                                CornerRadius="2,2,0,0" 
                                                 BorderThickness="0" 
-                                                Background="#FFFBFBFB"  
+                                                Background="#ffffff"  
                                                 HorizontalAlignment="Stretch" 
                                                 DockPanel.Dock="Top">
                                             <Border.Triggers>                                                
@@ -77,12 +77,7 @@
                                                     </BeginStoryboard>
                                                 </EventTrigger>
                                             </Border.Triggers>
-                                            <Border.Effect>
-                                                <DropShadowEffect BlurRadius="7"
-                                                                  Direction="270"
-                                                                  ShadowDepth="5"
-                                                                  Opacity=".4"/>
-                                            </Border.Effect>
+                                            
                                         </Border>
                                         <DockPanel LastChildFill="False">
                                             <TextBlock Margin="8,0,0,4" 
@@ -94,7 +89,7 @@
                                                    Text="{TemplateBinding Title}" 
                                                    FontSize="16" />
                                             <Button x:Name="ButtonClose"  Style="{DynamicResource GlassButton}"
-                                            DockPanel.Dock="Right" VerticalAlignment="Center" Opacity="0" Height="25" Width="35" Background="#c8373a"
+                                            DockPanel.Dock="Right" VerticalAlignment="Center" Opacity="0" Height="25" Width="35" Background="#ff0000"
                                             Click="btnClose_Click">
                                                 <TextBlock FontWeight="ExtraBlack" Foreground="Black" Width="Auto" FontSize="12" FontFamily="Century Gothic">X</TextBlock>
                                                 <Button.RenderTransform>
@@ -121,12 +116,12 @@
                                                 </Button.Triggers>
                                             </Button>
                                             <Button x:Name="ButtonMinimize" Style="{DynamicResource  GlassButton}"
-                                            DockPanel.Dock="Right" VerticalAlignment="Center" Opacity="0"  Height="25" Width="35" Background="#FFE4E4E4"
+                                            DockPanel.Dock="Right" VerticalAlignment="Center" Opacity="0"  Height="25" Width="35" Background="#ffffff"
                                             Click="btnMinimize_Click">
                                                 <TextBlock FontWeight="ExtraBold" Foreground="Black" Width="Auto" FontSize="12" FontFamily="Century Gothic">_</TextBlock>
                                                 <Button.RenderTransform>
                                                     <TransformGroup>
-                                                        <TranslateTransform X="-5"/>
+                                                        <TranslateTransform X="-10"/>
                                                     </TransformGroup>
                                                 </Button.RenderTransform>
                                                 <Button.Triggers>

@@ -10,8 +10,7 @@ namespace Scrambler.Strategies
 {
     public abstract class Strategy
     {
-        protected Alphabets.Alphabet alphabet;
-        private InputLanguage inputLanguage { get; set; }
+        public Alphabets.Alphabet Alphabet;
         public abstract void AddElements(StackPanel parent);
         public abstract void DeleteElements(StackPanel parent);
         public abstract string Encrypt(string text);
@@ -19,11 +18,6 @@ namespace Scrambler.Strategies
 
         public Strategy()
         {
-            inputLanguage = InputLanguage.CurrentInputLanguage;
-            if (inputLanguage.Culture.EnglishName == "Russian (Russia)")
-                alphabet = new Alphabets.Cyrillic();
-            else
-                alphabet = new Alphabets.Roman();
         }
     }
 }

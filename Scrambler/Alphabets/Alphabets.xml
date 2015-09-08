@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAlphabet xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Alphabet>
+    <Quantity>69</Quantity>
+    <Letters>абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ ,.</Letters>
+    <Name>Cyrillic</Name>
+    <Chosen>false</Chosen>
+  </Alphabet>
+  <Alphabet>
+    <Quantity>55</Quantity>
+    <Letters>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,.</Letters>
+    <Name>Roman</Name>
+    <Chosen>false</Chosen>
+  </Alphabet>
+  <Alphabet>
+    <Quantity>26</Quantity>
+    <Letters>абвгґдеєжзиіїйклмнопрстуфхцчшщьюяАБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ ',.</Letters>
+    <Name>Український алфавіт</Name>
+    <Chosen>true</Chosen>
+  </Alphabet>
+</ArrayOfAlphabet>

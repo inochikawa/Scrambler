@@ -36,17 +36,11 @@ namespace Scrambler.Cyphers
                 char letter = text[i];
                 char gammaLetter = gamma[i];
 
-                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
-                    if (char.IsUpper(letter))
-                    {
-                        int indexResult = (alphabet.UpperCase.IndexOf(gammaLetter) + alphabet.UpperCase.IndexOf(letter)) % alphabet.Quantity;
-                        result.Append(alphabet.UpperCase[indexResult]);                       
-                    }
-                    else
-                    {
-                        int indexResult = (alphabet.LowerCase.IndexOf(gammaLetter) + alphabet.LowerCase.IndexOf(letter)) % alphabet.Quantity;
-                        result.Append(alphabet.LowerCase[indexResult]);         
-                    }
+                if (alphabet.Letters.Contains(letter))
+                {
+                    int indexResult = (alphabet.Letters.IndexOf(gammaLetter) + alphabet.Letters.IndexOf(letter)) % alphabet.Quantity;
+                    result.Append(alphabet.Letters[indexResult]);
+                }
                 else
                     result.Append(letter);
             }
@@ -81,17 +75,11 @@ namespace Scrambler.Cyphers
                 char letter = text[i];
                 char gammaLetter = gamma[i];
 
-                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
-                    if (char.IsUpper(letter))
-                    {
-                        int indexResult = (alphabet.UpperCase.IndexOf(letter) - alphabet.UpperCase.IndexOf(gammaLetter) + alphabet.Quantity) % alphabet.Quantity;
-                        result.Append(alphabet.UpperCase[indexResult]);
-                    }
-                    else
-                    {
-                        int indexResult = (alphabet.LowerCase.IndexOf(letter) - alphabet.LowerCase.IndexOf(gammaLetter) + alphabet.Quantity) % alphabet.Quantity;
-                        result.Append(alphabet.LowerCase[indexResult]);
-                    }
+                if (alphabet.Letters.Contains(letter))
+                {
+                    int indexResult = (alphabet.Letters.IndexOf(letter) - alphabet.Letters.IndexOf(gammaLetter) + alphabet.Quantity) % alphabet.Quantity;
+                    result.Append(alphabet.Letters[indexResult]);
+                }
                 else
                     result.Append(letter);
             }

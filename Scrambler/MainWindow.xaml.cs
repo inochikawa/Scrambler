@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Scrambler.View.Windows;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -28,6 +29,9 @@ namespace Scrambler
         {
             InitializeComponent();
             loadCyphers();
+
+            Alphabets.Alphabet.Load();
+            ChosenAlphabetLabel.Content = "Chosen alphabet: " + chosenAlphabet();
         }
 
         private void btnCodify(object sender, RoutedEventArgs e)
@@ -80,6 +84,7 @@ namespace Scrambler
 
             selectedStrategy = (Strategies.Strategy)Activator.CreateInstance(strategyDictionary[(string)cmbCypher.SelectedItem]);
             selectedStrategy.AddElements(stackPanel);
+            selectedStrategy.Alphabet = chosenAlphabet();
         }
         
         private void txtIn_TextChanged(object sender, TextChangedEventArgs e)
@@ -88,7 +93,20 @@ namespace Scrambler
 
             if (txtIn.Text == "") cmbCypher.IsEnabled = false; 
         }
-        
 
+        private void AlphabetsMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new AlphabetsWindow().ShowDialog();
+            ChosenAlphabetLabel.Content = "Chosen alphabet: " + chosenAlphabet();
+        }
+
+
+        private Alphabets.Alphabet chosenAlphabet()
+        {
+            foreach (Alphabets.Alphabet item in Alphabets.Alphabet.Alphabets)
+                if (item.Chosen)
+                    return item;
+            return null;
+        }
     }
 }

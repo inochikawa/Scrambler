@@ -8,12 +8,10 @@ namespace Scrambler.Alphabets
 {
     public class Cyrillic: Alphabet
     {
-        public Cyrillic()
+        public Cyrillic(string a, string b):base(a,b)
         {
-            base.UpperCase = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ ,.";
-            base.LowerCase = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя ,.";
-
-            Quantity = 36;
+            Letters = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ ,.";
+            Quantity = Letters.Length;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace Scrambler.Strategies
         Grid grid;
         TextBox txtKey;
         Label label;
+        Cyphers.XOREncryption XOREncryption;
 
         public XOREncryptionSt():base()
         {
@@ -42,38 +43,28 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            string result;
-            Cyphers.XOREncryption XOREncryption;
             try
             {
-                XOREncryption = new Cyphers.XOREncryption(txtKey.Text, alphabet);
+                XOREncryption = new Cyphers.XOREncryption(txtKey.Text, Alphabet);
             }
             catch (FormatException e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-                return null;
             }
-            result = XOREncryption.Encrypt(text);
-
-            return result;
+            return XOREncryption.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            string result;
-            Cyphers.XOREncryption XOREncryption;
             try
             {
-                XOREncryption = new Cyphers.XOREncryption(txtKey.Text, alphabet);
+                XOREncryption = new Cyphers.XOREncryption(txtKey.Text, Alphabet);
             }
             catch (FormatException e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-                return null;
             }
-            result = XOREncryption.Decrypt(text);
-
-            return result;
+            return XOREncryption.Decrypt(text);
         }
 
         public override void DeleteElements(StackPanel parent)

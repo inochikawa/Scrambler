@@ -10,7 +10,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
-                    <Border CornerRadius="3" BorderThickness="1" RenderTransformOrigin="0.5,1" x:Name="borderBackground" BorderBrush="#FFFFFFFF">
+                    <Border CornerRadius="2" BorderThickness="1" RenderTransformOrigin="0.5,1" x:Name="borderBackground" BorderBrush="#000000">
                         <Border.RenderTransform>
                             <TransformGroup>
                                 <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
@@ -19,9 +19,9 @@
                             </TransformGroup>
                         </Border.RenderTransform>
 
-                        <Border Background="{TemplateBinding Background}" CornerRadius="3" x:Name="borderForeground">
+                        <Border Background="{TemplateBinding Background}" CornerRadius="2" x:Name="borderForeground">
                             <Grid>
-                                <Border x:Name="borderShine" CornerRadius="3" Opacity="0">
+                                <Border x:Name="borderShine" CornerRadius="2" Opacity="0">
                                     <Border.BorderBrush>
                                         <LinearGradientBrush EndPoint="0.811,0.2" StartPoint="0.246,1.023">
                                             <GradientStop Color="#FF7C9FC8" Offset="0"/>
@@ -29,7 +29,7 @@
                                             <GradientStop Color="#FF353535" Offset="0.491"/>
                                         </LinearGradientBrush>
                                     </Border.BorderBrush>
-                                    <Border BorderThickness="0"  CornerRadius="3" Margin="0" >
+                                    <Border BorderThickness="0"  CornerRadius="2" Margin="0" >
                                         <Border.Background>
                                             <RadialGradientBrush GradientOrigin="0.7,-.6" RadiusY="0.7" RadiusX="1.5">
                                                 <RadialGradientBrush.RelativeTransform>

@@ -61,7 +61,7 @@ namespace Scrambler.Strategies
             Cyphers.Tritemius tritemius;
             try
             {
-                tritemius = new Cyphers.Tritemius(alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
+                tritemius = new Cyphers.Tritemius(Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
             }
             catch (FormatException e)
             {
@@ -84,7 +84,7 @@ namespace Scrambler.Strategies
             Cyphers.Tritemius tritemius;
             try
             {
-                tritemius = new Cyphers.Tritemius(alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
+                tritemius = new Cyphers.Tritemius(Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
             }
             catch (FormatException e)
             {

@@ -14,6 +14,7 @@ namespace Scrambler.Strategies
         Grid grid;
         TextBox txtKey;
         Label label;
+        Cyphers.Caesar ceaser;
 
         public CeaserSt():base()
         {
@@ -33,6 +34,8 @@ namespace Scrambler.Strategies
 
             grid.Children.Add(txtKey);
             grid.Children.Add(label);
+
+            
         }
         public override void AddElements(StackPanel parent)
         {
@@ -41,38 +44,28 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            string result;
-            Cyphers.Caesar ceaser;
             try
-            {                
-                ceaser = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), alphabet);
+            {
+                ceaser = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), Alphabet);
             }
             catch (FormatException e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-                return null;
             }
-            result = ceaser.Encrypt(text);
-
-            return result;
+            return ceaser.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            string result;
-            Cyphers.Caesar ceaser;
             try
             {
-                ceaser = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), alphabet);
+                ceaser = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), Alphabet);
             }
             catch (FormatException e)
             {
                 System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-                return null;
             }
-            result = ceaser.Decrypt(text);
-
-            return result;
+            return ceaser.Decrypt(text);
         }
 
         public override void DeleteElements(StackPanel parent)

@@ -1,0 +1,14 @@
+﻿<Application x:Class="Scrambler.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="View/AnimationEffects.xaml"/>
+                <ResourceDictionary Source="View/GlassButton.xaml"/>
+                <ResourceDictionary Source="View/AirWindow.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

@@ -1,0 +1,99 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="GlassButton" TargetType="Button">
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="3"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border CornerRadius="3" BorderThickness="1" RenderTransformOrigin="0.5,1" x:Name="borderBackground" BorderBrush="#FFFFFFFF">
+                        <Border.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform x:Name="scaleTransform" ScaleX="1" ScaleY="1"/>
+                                <TranslateTransform x:Name="translateTransform"/>
+                                
+                            </TransformGroup>
+                        </Border.RenderTransform>
+
+                        <Border Background="{TemplateBinding Background}" CornerRadius="3" x:Name="borderForeground">
+                            <Grid>
+                                <Border x:Name="borderShine" CornerRadius="3" Opacity="0">
+                                    <Border.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0.811,0.2" StartPoint="0.246,1.023">
+                                            <GradientStop Color="#FF7C9FC8" Offset="0"/>
+                                            <GradientStop Color="#FF7C9FC8" Offset=".5"/>
+                                            <GradientStop Color="#FF353535" Offset="0.491"/>
+                                        </LinearGradientBrush>
+                                    </Border.BorderBrush>
+                                    <Border BorderThickness="0"  CornerRadius="3" Margin="0" >
+                                        <Border.Background>
+                                            <RadialGradientBrush GradientOrigin="0.7,-.6" RadiusY="0.7" RadiusX="1.5">
+                                                <RadialGradientBrush.RelativeTransform>
+                                                    <TransformGroup>
+                                                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleY="1" ScaleX="1"/>
+                                                        <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="0.5"/>
+                                                        <RotateTransform Angle="-45" CenterY="0.5" CenterX="0.5"/>
+                                                        <TranslateTransform/>
+                                                    </TransformGroup>
+                                                </RadialGradientBrush.RelativeTransform>
+                                                <GradientStop Color="#ffffff" Offset="0"/>
+                                                <GradientStop Color="#0BFFFFFF" Offset=".7"/>
+                                            </RadialGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                </Border>
+
+                                <ContentPresenter VerticalAlignment="Center"  Grid.RowSpan="2" HorizontalAlignment="Center" x:Name="contentPresenter"/>
+                            </Grid>
+                        </Border>
+                    </Border>
+
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="ShowShine">
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderShine" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:.3" Value="1"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+
+                        <Storyboard x:Key="HideShine">
+                            <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="borderShine" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                <SplineDoubleKeyFrame KeyTime="00:00:.3" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomDownEffect}"/>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomUpEffect}"/>
+                            </Trigger.ExitActions>
+                            <Setter Property="Background" TargetName="borderForeground" Value="White"/>
+                            <Setter Property="Opacity" TargetName="borderForeground" Value=".5"/>
+                        </Trigger>
+
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.ExitActions>
+                                <BeginStoryboard Storyboard="{StaticResource HideShine}" />
+                                <BeginStoryboard Storyboard="{StaticResource ZoomNormalEffect}"/>
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard Storyboard="{StaticResource ShowShine}"/>
+                                <BeginStoryboard Storyboard="{StaticResource ZoomUpEffect}"/>
+                            </Trigger.EnterActions>
+                        </Trigger>
+
+                    </ControlTemplate.Triggers>
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>

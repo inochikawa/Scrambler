@@ -21,7 +21,7 @@
                  x:Name="txtIn"
                  Grid.Column="0"
                  Grid.Row="0" 
-                 TextChanged="txtIn_TextChanged" CharacterCasing="Lower"/>
+                 TextChanged="txtIn_TextChanged"/>
         <Button Content="Encrypt" 
                 HorizontalAlignment="Center"  
                 VerticalAlignment="Top" 

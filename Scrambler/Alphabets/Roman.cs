@@ -10,10 +10,6 @@ namespace Scrambler.Alphabets
     {        
         public Roman()
         {
-            LowerCase.Add("min", 97);
-            LowerCase.Add("max", 122);
-            UpperCase.Add("min", 65);
-            UpperCase.Add("max", 90);
             Quantity = 23;
         }
     }

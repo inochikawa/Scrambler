@@ -27,8 +27,8 @@ namespace Scrambler.Cyphers
             int indexInText = 1;
             foreach (char a in text)
             {
-                cryptedText.Append(alphabetString[newSymbolIndex(a, indexInText, keyA, keyB, keyC)]);
-                alphabetString.IndexOf(a);
+                cryptedText.Append(alphabet.LowerCase[newSymbolIndex(a, indexInText, keyA, keyB, keyC)]);
+                alphabet.LowerCase.IndexOf(a);
                 indexInText++;
             }
             return cryptedText.ToString();
@@ -40,51 +40,38 @@ namespace Scrambler.Cyphers
             int indexInText = 1;
             foreach (char a in text)
             {
-                decryptedText.Append(alphabetString[oldSymbolIndex(a, indexInText, keyA, keyB, keyC)]);
-                alphabetString.IndexOf(a);
+                decryptedText.Append(alphabet.LowerCase[oldSymbolIndex(a, indexInText, keyA, keyB, keyC)]);
+                alphabet.LowerCase.IndexOf(a);
                 indexInText++;
             }
             return decryptedText.ToString();
         }
         private int newSymbolIndex(char symbol, int indexInText, int a, int b, int c)
         {
-            int result = (alphabetString.IndexOf(symbol) + ((int)Math.Pow(indexInText, 2) * a + (indexInText * b) + c) % alphabetString.Length);
-            if (result < alphabetString.Length)
+            int result = (alphabet.LowerCase.IndexOf(symbol) + ((int)Math.Pow(indexInText, 2) * a + (indexInText * b) + c) % alphabet.LowerCase.Length);
+            if (result < alphabet.LowerCase.Length)
             {
                 return result;
             }
             else
             {
-                return (result % (alphabetString.Length - 1)) - 1;
+                return (result % (alphabet.LowerCase.Length - 1)) - 1;
             }
 
         }
         private int oldSymbolIndex(char symbol, int indexInText, int a, int b, int c)
         {
-            int result = (alphabetString.IndexOf(symbol) - ((int)Math.Pow(indexInText, 2) * a + (indexInText * b) + c) % alphabetString.Length);
+            int result = (alphabet.LowerCase.IndexOf(symbol) - ((int)Math.Pow(indexInText, 2) * a + (indexInText * b) + c) % alphabet.LowerCase.Length);
             if (result >= 0)
             {
                 return result;
             }
             else
             {
-                return alphabetString.Length - Math.Abs(result);
+                return alphabet.LowerCase.Length - Math.Abs(result);
             }
 
         }
 
-        private string alphabetString
-        {
-            get
-            {
-                StringBuilder alphabetSt = new StringBuilder();
-                for (int i = alphabet.LowerCase["min"]; i <= alphabet.LowerCase["max"]; i++)
-                {
-                    alphabetSt.Append((char)i);
-                }
-
-                return alphabetSt.ToString();
-            }
-        }
     }
 }

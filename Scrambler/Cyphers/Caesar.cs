@@ -24,34 +24,23 @@ namespace Scrambler.Cyphers
                 key = key % alphabet.Quantity;
             foreach (var letter in text)
             {
-                //Если буква является строчной
-                if ((int)letter >= (int)alphabet.LowerCase["min"] && (int)letter <= (int)alphabet.LowerCase["max"])
-                {
-                    //Если буква, после сдвига выходит за пределы алфавита
-                    if ((int)letter - key > (int)alphabet.LowerCase["max"])
-                        //Добавление в строку результатов символ
-                        result.Append((char)((int)letter - key + alphabet.Quantity));
-                    //Если буква может быть сдвинута в пределах алфавита
+                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
+                    if (char.IsUpper(letter))
+                    {
+                        if (alphabet.UpperCase.IndexOf(letter) - key < 0)
+                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) - key + alphabet.Quantity]);
+                        else
+                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) - key]);
+                    }
                     else
-                        //Добавление в строку результатов символ
-                        result.Append((char)((int)letter - key));
-                    continue;
-                }
-
-                if (((int)letter >= (int)alphabet.UpperCase["min"]) && ((int)letter <= (int)alphabet.UpperCase["max"]))
-                {
-                    //Если буква, после сдвига выходит за пределы алфавита
-                    if ((int)letter - key > (int)alphabet.UpperCase["max"])
-                        //Добавление в строку результатов символ
-                        result.Append((char)((int)letter - key + alphabet.Quantity));
-                    //Если буква может быть сдвинута в пределах алфавита
-                    else
-                        //Добавление в строку результатов символ
-                        result.Append((char)((int)letter - key));
-                    continue;
-                }
-
-                result.Append(letter);
+                    {
+                        if (alphabet.LowerCase.IndexOf(letter) - key < 0)
+                            result.Append(alphabet.LowerCase[alphabet.LowerCase.IndexOf(letter) - key + alphabet.Quantity]);
+                        else
+                            result.Append(alphabet.LowerCase[alphabet.LowerCase.IndexOf(letter) - key]);
+                    }
+                else
+                    result.Append(letter);
             }
             return result.ToString();
         }
@@ -63,34 +52,23 @@ namespace Scrambler.Cyphers
                 key = key % alphabet.Quantity;
             foreach (var letter in text)
             {
-                //Если буква является строчной
-                if ((int)letter >= (int)alphabet.LowerCase["min"] && (int)letter <= (int)alphabet.LowerCase["max"])
-                {
-                    //Если буква, после сдвига выходит за пределы алфавита
-                    if ((int)letter + key > (int)alphabet.LowerCase["max"])
-                        //Добавление в строку результатов символ
-                        result.Append((char) ((int)letter + key - alphabet.Quantity));
-                    //Если буква может быть сдвинута в пределах алфавита
+                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
+                    if(char.IsUpper(letter))
+                    {
+                        if (alphabet.UpperCase.IndexOf(letter) + key > alphabet.Quantity - 1)
+                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) + key - alphabet.Quantity]);
+                        else
+                            result.Append(alphabet.UpperCase[alphabet.UpperCase.IndexOf(letter) + key]);
+                    }
                     else
-                        //Добавление в строку результатов символ
-                        result.Append((char) ((int)letter + key));
-                    continue;
-                }
-
-                if (((int)letter >= (int)alphabet.UpperCase["min"]) && ((int)letter <= (int)alphabet.UpperCase["max"]))
-                {
-                    //Если буква, после сдвига выходит за пределы алфавита
-                    if ((int)letter + key > (int)alphabet.UpperCase["max"])
-                        //Добавление в строку результатов символ
-                        result.Append((char)((int)letter + key - alphabet.Quantity));
-                    //Если буква может быть сдвинута в пределах алфавита
-                    else
-                        //Добавление в строку результатов символ
-                        result.Append((char)((int)letter + key));
-                    continue;
-                }
-
-                result.Append(letter);
+                    {
+                        if (alphabet.LowerCase.IndexOf(letter) + key > alphabet.Quantity - 1)
+                            result.Append(alphabet.LowerCase[ alphabet.LowerCase.IndexOf(letter) + key - alphabet.Quantity]);
+                        else
+                            result.Append(alphabet.LowerCase[alphabet.LowerCase.IndexOf(letter) + key]);
+                    }
+                else
+                    result.Append(letter);
             }
             return result.ToString();
         }

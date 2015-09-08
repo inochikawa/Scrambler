@@ -35,22 +35,18 @@ namespace Scrambler.Cyphers
             {
                 char letter = text[i];
                 char gammaLetter = gamma[i];
-                //Если буква является большой
-                if ((int)letter >= (int)alphabet.UpperCase["min"] && (int)letter <= (int)alphabet.UpperCase["max"])
-                    letter = (char)((int)text[i] + 32);
 
-                if ((int)gammaLetter >= (int)alphabet.UpperCase["min"] && (int)gammaLetter <= (int)alphabet.UpperCase["max"])
-                    gammaLetter = (char)((int)gamma[i] + 32);
-
-                //Если введена буква из алфавита, а не другой символ
-                if ((int)letter >= (int)alphabet.LowerCase["min"] && (int)letter <= (int)alphabet.LowerCase["max"])
-                {
-                    int indexResult = ((int)gammaLetter + (int)letter - 2 * alphabet.LowerCase["min"]) % alphabet.Quantity;
-                    if (indexResult == 0)
-                        indexResult = alphabet.Quantity;
-                    indexResult += alphabet.LowerCase["min"];
-                    result.Append((char)indexResult);
-                } 
+                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
+                    if (char.IsUpper(letter))
+                    {
+                        int indexResult = (alphabet.UpperCase.IndexOf(gammaLetter) + alphabet.UpperCase.IndexOf(letter)) % alphabet.Quantity;
+                        result.Append(alphabet.UpperCase[indexResult]);                       
+                    }
+                    else
+                    {
+                        int indexResult = (alphabet.LowerCase.IndexOf(gammaLetter) + alphabet.LowerCase.IndexOf(letter)) % alphabet.Quantity;
+                        result.Append(alphabet.LowerCase[indexResult]);         
+                    }
                 else
                     result.Append(letter);
             }
@@ -84,22 +80,18 @@ namespace Scrambler.Cyphers
             {
                 char letter = text[i];
                 char gammaLetter = gamma[i];
-                //Если буква является большой
-                if ((int)letter >= (int)alphabet.UpperCase["min"] && (int)letter <= (int)alphabet.UpperCase["max"])
-                    letter = (char)((int)text[i] - 32);
 
-                if ((int)gammaLetter >= (int)alphabet.UpperCase["min"] && (int)gammaLetter <= (int)alphabet.UpperCase["max"])
-                    gammaLetter = (char)((int)gamma[i] - 32);
-
-                //Если введена буква из алфавита, а не другой символ
-                if ((int)letter >= (int)alphabet.LowerCase["min"] && (int)letter <= (int)alphabet.LowerCase["max"])
-                {
-                    int indexResult = ((int)letter - (int)gammaLetter + alphabet.Quantity) % alphabet.Quantity;
-                    if (indexResult == 0)
-                        indexResult = alphabet.Quantity;
-                    indexResult += alphabet.LowerCase["min"];
-                    result.Append((char)indexResult);
-                }
+                if (alphabet.UpperCase.Contains(letter) || alphabet.LowerCase.Contains(letter))
+                    if (char.IsUpper(letter))
+                    {
+                        int indexResult = (alphabet.UpperCase.IndexOf(letter) - alphabet.UpperCase.IndexOf(gammaLetter) + alphabet.Quantity) % alphabet.Quantity;
+                        result.Append(alphabet.UpperCase[indexResult]);
+                    }
+                    else
+                    {
+                        int indexResult = (alphabet.LowerCase.IndexOf(letter) - alphabet.LowerCase.IndexOf(gammaLetter) + alphabet.Quantity) % alphabet.Quantity;
+                        result.Append(alphabet.LowerCase[indexResult]);
+                    }
                 else
                     result.Append(letter);
             }

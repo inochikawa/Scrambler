@@ -10,12 +10,10 @@ namespace Scrambler.Alphabets
     {
         public Cyrillic()
         {
-            LowerCase.Add("min", 1072);
-            LowerCase.Add("max", 1103);
-            UpperCase.Add("min", 1040);
-            UpperCase.Add("max", 1071);
+            base.UpperCase = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ ,.";
+            base.LowerCase = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя ,.";
 
-            Quantity = 33;
+            Quantity = 36;
         }
     }
 }

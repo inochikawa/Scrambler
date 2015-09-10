@@ -10,12 +10,26 @@
     <Quantity>55</Quantity>
     <Letters>abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ ,.</Letters>
     <Name>Roman</Name>
-    <Chosen>false</Chosen>
+    <Chosen>true</Chosen>
   </Alphabet>
   <Alphabet>
     <Quantity>26</Quantity>
     <Letters>абвгґдеєжзиіїйклмнопрстуфхцчшщьюяАБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯ ',.</Letters>
     <Name>Український алфавіт</Name>
-    <Chosen>true</Chosen>
+    <Chosen>false</Chosen>
+  </Alphabet>
+  <Alphabet>
+    <Quantity>26</Quantity>
+    <Letters>1234</Letters>
+    <Name>Tema</Name>
+    <Chosen>false</Chosen>
+  </Alphabet>
+  <Alphabet>
+    <Quantity>26</Quantity>
+    <Letters>При использовании описателя десятичного формата ("D") число преобразуется в строку, состоящую из десятичных
+ цифр (0–9); если число отрицательное, перед ним ставится отрицательный знак. Этот формат доступен 
+только для целых типов.</Letters>
+    <Name>Штирлиц</Name>
+    <Chosen>false</Chosen>
   </Alphabet>
 </ArrayOfAlphabet>

@@ -58,9 +58,14 @@
     <Compile Include="Attributes\Strategy.cs" />
     <Compile Include="Cyphers\Caesar.cs" />
     <Compile Include="Cyphers\Cypher.cs" />
+    <Compile Include="Cyphers\Polinom.cs" />
+    <Compile Include="Cyphers\Shtirlits.cs" />
     <Compile Include="Cyphers\Tritemius.cs" />
     <Compile Include="Cyphers\XOREncryption.cs" />
+    <Compile Include="Mathematics\Function.cs" />
     <Compile Include="Strategies\CeaserSt.cs" />
+    <Compile Include="Strategies\PolinomSt.cs" />
+    <Compile Include="Strategies\ShtirlitsSt.cs" />
     <Compile Include="Strategies\Strategy.cs" />
     <Compile Include="Strategies\TritemiusSt.cs" />
     <Compile Include="Strategies\XOREncryptionSt.cs" />

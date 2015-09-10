@@ -37,7 +37,7 @@
                 <Label Content="Letters..."/>
                 <TextBox x:Name="alphabetLettersTextBox"
                          Height="70" TextWrapping="Wrap"
-                         VerticalAlignment="Center"/>
+                         VerticalAlignment="Center" AcceptsReturn="True"/>
             </StackPanel>
             <Button x:Name="AddAlphabetButton"
                     Content="Add new..."

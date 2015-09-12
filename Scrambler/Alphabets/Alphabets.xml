@@ -32,4 +32,10 @@
     <Name>Штирлиц</Name>
     <Chosen>false</Chosen>
   </Alphabet>
+  <Alphabet>
+    <Quantity>26</Quantity>
+    <Letters>abcdefghijklmnopqrstuvwxyz</Letters>
+    <Name>HalfRoman</Name>
+    <Chosen>false</Chosen>
+  </Alphabet>
 </ArrayOfAlphabet>

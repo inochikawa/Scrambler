@@ -34,6 +34,12 @@ namespace Scrambler.Alphabets
 
         }
 
+        public char this[int index]
+        {
+            get { return Letters[index]; }
+            private set { }
+        }
+
         public static void Save()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<Alphabet>));

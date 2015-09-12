@@ -45,7 +45,7 @@ namespace Scrambler.Strategies
         {
             try
             {
-                polinom = new Cyphers.Polinom(Alphabet, new Mathematics.Function(indexes(txtKey.Text)));
+                polinom = new Cyphers.Polinom(Alphabet, new Mathematics.Function(txtKey.Text));
             }
             catch (FormatException e)
             {
@@ -58,7 +58,7 @@ namespace Scrambler.Strategies
         {
             try
             {
-                polinom = new Cyphers.Polinom(Alphabet, new Mathematics.Function(indexes(txtKey.Text)));
+                polinom = new Cyphers.Polinom(Alphabet, new Mathematics.Function(txtKey.Text));
             }
             catch (FormatException e)
             {

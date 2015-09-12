@@ -63,6 +63,7 @@
     <Compile Include="Cyphers\Tritemius.cs" />
     <Compile Include="Cyphers\XOREncryption.cs" />
     <Compile Include="Mathematics\Function.cs" />
+    <Compile Include="Mathematics\Member.cs" />
     <Compile Include="Strategies\CeaserSt.cs" />
     <Compile Include="Strategies\PolinomSt.cs" />
     <Compile Include="Strategies\ShtirlitsSt.cs" />

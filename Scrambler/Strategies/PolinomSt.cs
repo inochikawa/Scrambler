@@ -18,6 +18,15 @@ namespace Scrambler.Strategies
 
         public PolinomSt()
         {
+            try
+            {
+                polinom = new Cyphers.Polinom();
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
+
             grid = new Grid();
             txtKey = new TextBox();
             txtKey.Name = "txtKey";
@@ -43,27 +52,13 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            try
-            {
-                polinom = new Cyphers.Polinom(Alphabet, new Mathematics.Function(txtKey.Text));
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
+            polinom.Init(Alphabet, new Mathematics.Function(txtKey.Text));
             return polinom.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            try
-            {
-                polinom = new Cyphers.Polinom(Alphabet, new Mathematics.Function(txtKey.Text));
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
+            polinom.Init(Alphabet, new Mathematics.Function(txtKey.Text));
             return polinom.Decrypt(text);
         }
 

@@ -14,11 +14,21 @@ namespace Scrambler.Strategies
     {
         Grid grid;
         List<TextBox> textBoxes;
+        Cyphers.Tritemius tritemius;
 
         public TritemiusSt()
         {
             grid = new Grid();
             textBoxes = new List<TextBox>();
+
+            try
+            {
+                tritemius = new Cyphers.Tritemius();
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
         }
 
         public override void AddElements(System.Windows.Controls.StackPanel parent)
@@ -57,20 +67,7 @@ namespace Scrambler.Strategies
 
         public override string Decrypt(string text)
         {
-            string result;
-            Cyphers.Tritemius tritemius;
-            try
-            {
-                tritemius = new Cyphers.Tritemius(Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-                return null;
-            }
-            result = tritemius.Decrypt(text);
-
-            return result;
+            return tritemius.Decrypt(text);
         }
 
         public override void DeleteElements(System.Windows.Controls.StackPanel parent)
@@ -80,20 +77,8 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            string result;
-            Cyphers.Tritemius tritemius;
-            try
-            {
-                tritemius = new Cyphers.Tritemius(Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-                return null;
-            }
-            result = tritemius.Encrypt(text);
-
-            return result;
+            tritemius.Init(Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
+            return tritemius.Encrypt(text);
         }
     }
 }

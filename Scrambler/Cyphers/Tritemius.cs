@@ -21,7 +21,11 @@ namespace Scrambler.Cyphers
         private bool stringKey { get; set; }
 
 
-        public Tritemius(Alphabets.Alphabet _alphabet, int _a, int _b, int _c)
+        public Tritemius()
+        {
+        }
+
+        public void Init(Alphabets.Alphabet _alphabet, int _a, int _b, int _c)
         {
             this.Alphabet = _alphabet;
             this.A = _a;

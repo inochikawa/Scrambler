@@ -17,5 +17,6 @@ namespace Scrambler.Cyphers
 
         public abstract string Decrypt(string text);
 
+       
     }
 }

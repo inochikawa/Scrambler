@@ -7,16 +7,22 @@ using System.Windows.Controls;
 
 namespace Scrambler.Cyphers
 {
-    class Caesar:Cyphers.Cypher
+    class Caesar: Cypher
     {
         int key;
         Alphabets.Alphabet alphabet;
 
-        public Caesar(int key, Alphabets.Alphabet alphabet):base()
+        public Caesar():base()
+        {
+            
+        }
+
+        public void Init(int key, Alphabets.Alphabet alphabet)
         {
             this.key = key;
             this.alphabet = alphabet;
         }
+
         public override string Decrypt(string text)
         {
             StringBuilder result = new StringBuilder();
@@ -53,5 +59,6 @@ namespace Scrambler.Cyphers
             }
             return result.ToString();
         }
+        
     }
 }

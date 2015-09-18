@@ -12,7 +12,14 @@ namespace Scrambler.Strategies
         Cyphers.Shtirlits shtirlits; 
         public ShtirlitsSt():base()
         {
-
+            try
+            {
+                shtirlits = new Cyphers.Shtirlits();
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
         }
 
         public override void AddElements(System.Windows.Controls.StackPanel parent)
@@ -27,27 +34,13 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            try
-            {
-                shtirlits = new Cyphers.Shtirlits(Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
+            shtirlits.Init(Alphabet);
             return shtirlits.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            try
-            {
-                shtirlits = new Cyphers.Shtirlits(Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
+            shtirlits.Init(Alphabet);
             return shtirlits.Decrypt(text);
         }
     }

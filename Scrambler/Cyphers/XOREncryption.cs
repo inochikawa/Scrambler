@@ -10,7 +10,12 @@ namespace Scrambler.Cyphers
     {
         string gammaKey;
         Alphabets.Alphabet alphabet;
-        public XOREncryption(string gammaKey, Alphabets.Alphabet alphabet)
+        public XOREncryption()
+        {
+            
+        }
+
+        public void Init(string gammaKey, Alphabets.Alphabet alphabet)
         {
             this.alphabet = alphabet;
             this.gammaKey = gammaKey;

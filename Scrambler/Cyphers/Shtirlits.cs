@@ -10,13 +10,18 @@ namespace Scrambler.Cyphers
     public class Shtirlits: Cypher
     {
         List<string> alphabetMass = new List<string>();
-        public Shtirlits(Alphabets.Alphabet alphabet)
+        public Shtirlits()
+        {
+            
+        }
+
+        public void Init(Alphabets.Alphabet alphabet)
         {
             StringBuilder row = new StringBuilder();
 
             foreach (var letter in alphabet.Letters)
             {
-                if(letter == '\n')
+                if (letter == '\n')
                 {
                     alphabetMass.Add(row.ToString());
                     row.Clear();

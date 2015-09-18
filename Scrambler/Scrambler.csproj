@@ -58,6 +58,7 @@
     <Compile Include="Attributes\Strategy.cs" />
     <Compile Include="Cyphers\Caesar.cs" />
     <Compile Include="Cyphers\Cypher.cs" />
+    <Compile Include="Cyphers\DES.cs" />
     <Compile Include="Cyphers\Polinom.cs" />
     <Compile Include="Cyphers\Shtirlits.cs" />
     <Compile Include="Cyphers\Tritemius.cs" />

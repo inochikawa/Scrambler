@@ -18,6 +18,15 @@ namespace Scrambler.Strategies
 
         public XOREncryptionSt():base()
         {
+            try
+            {
+                XOREncryption = new Cyphers.XOREncryption();
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
+
             grid = new Grid();
             txtKey = new TextBox();
             txtKey.Name = "txtKey";
@@ -43,27 +52,12 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            try
-            {
-                XOREncryption = new Cyphers.XOREncryption(txtKey.Text, Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
             return XOREncryption.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            try
-            {
-                XOREncryption = new Cyphers.XOREncryption(txtKey.Text, Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
+            XOREncryption.Init(txtKey.Text, Alphabet);
             return XOREncryption.Decrypt(text);
         }
 

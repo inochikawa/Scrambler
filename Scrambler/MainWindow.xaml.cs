@@ -22,7 +22,7 @@ namespace Scrambler
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Dictionary<string, Type> strategyDictionary = new Dictionary<string, Type>();
+        private Dictionary<string, Strategies.Strategy> strategyDictionary = new Dictionary<string, Strategies.Strategy>();
         private Strategies.Strategy selectedStrategy;
 
         public MainWindow()
@@ -72,7 +72,7 @@ namespace Scrambler
                     if(attrValue.Type != null)
                     {
                         cmbCypher.Items.Add(attrValue.Type.Name);
-                        strategyDictionary.Add(attrValue.Type.Name, type);
+                        strategyDictionary.Add(attrValue.Type.Name, (Strategies.Strategy)Activator.CreateInstance(type));
                     }
                 }
             }
@@ -101,7 +101,7 @@ namespace Scrambler
         {
             if (selectedStrategy != null) selectedStrategy.DeleteElements(stackPanel);
 
-            selectedStrategy = (Strategies.Strategy)Activator.CreateInstance(strategyDictionary[(string)cmbCypher.SelectedItem]);
+            selectedStrategy = strategyDictionary[(string)cmbCypher.SelectedItem];
             selectedStrategy.AddElements(stackPanel);
             selectedStrategy.Alphabet = chosenAlphabet();
         }

@@ -18,6 +18,15 @@ namespace Scrambler.Strategies
 
         public CeaserSt():base()
         {
+            try
+            {
+                ceaser = new Cyphers.Caesar();
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
+
             grid = new Grid();
             txtKey = new TextBox();
             txtKey.Name = "txtKey";
@@ -44,27 +53,12 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            try
-            {
-                ceaser = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
             return ceaser.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            try
-            {
-                ceaser = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
+            ceaser.Init(Convert.ToInt32(txtKey.Text), Alphabet);
             return ceaser.Decrypt(text);
         }
 

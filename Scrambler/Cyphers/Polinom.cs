@@ -10,7 +10,11 @@ namespace Scrambler.Cyphers
     {
         Alphabets.Alphabet alphabet;
         Mathematics.Function function;
-        public Polinom(Alphabets.Alphabet alphabet, Mathematics.Function function)
+        public Polinom()
+        {
+            
+        }
+        public void Init(Alphabets.Alphabet alphabet, Mathematics.Function function)
         {
             this.alphabet = alphabet;
             this.function = function;

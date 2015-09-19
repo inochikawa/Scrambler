@@ -38,7 +38,6 @@ namespace Scrambler
         {
             try
             {
-                selectedStrategy.Cypher.Alphabet = chosenAlphabet();
                 txtOut.Text = selectedStrategy.Encrypt(txtIn.Text);
             }
             catch (NullReferenceException ex)
@@ -52,7 +51,6 @@ namespace Scrambler
         {
             try
             {
-                selectedStrategy.Cypher.Alphabet = chosenAlphabet();
                 txtOut.Text = selectedStrategy.Decrypt(txtIn.Text);
             }
             catch (NullReferenceException ex)
@@ -82,11 +80,7 @@ namespace Scrambler
 
         private void cmbCypher_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (selectedStrategy != null) selectedStrategy.DeleteElements(stackPanel);
-
-            selectedStrategy = (Strategies.Strategy)Activator.CreateInstance(strategyDictionary[(string)cmbCypher.SelectedItem]);
-            selectedStrategy.AddElements(stackPanel);
-            selectedStrategy.Alphabet = chosenAlphabet();
+            onSelectedStrategy();
         }
         
         private void txtIn_TextChanged(object sender, TextChangedEventArgs e)
@@ -101,18 +95,15 @@ namespace Scrambler
             new AlphabetsWindow().ShowDialog();
             ChosenAlphabetLabel.Content = "Chosen alphabet: " + chosenAlphabet();
         }
-
-<<<<<<< HEAD
+        
         private void onSelectedStrategy()
         {
             if (selectedStrategy != null) selectedStrategy.DeleteElements(stackPanel);
 
             selectedStrategy = strategyDictionary[(string)cmbCypher.SelectedItem];
             selectedStrategy.AddElements(stackPanel);
-            selectedStrategy.Cypher.Alphabet = chosenAlphabet();
+            selectedStrategy.Alphabet = chosenAlphabet();
         }
-=======
->>>>>>> parent of aa85e77... Некоторые мелкие правки
 
         private Alphabets.Alphabet chosenAlphabet()
         {

@@ -14,19 +14,9 @@ namespace Scrambler.Strategies
         Grid grid;
         TextBox txtKey;
         Label label;
-        Cyphers.Polinom polinom;
 
         public PolinomSt()
         {
-            try
-            {
-                polinom = new Cyphers.Polinom();
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
-
             grid = new Grid();
             txtKey = new TextBox();
             txtKey.Name = "txtKey";
@@ -52,14 +42,14 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            polinom.Init(Cypher.Alphabet, new Mathematics.Function(txtKey.Text));
-            return polinom.Encrypt(text);
+            createNewCypher();
+            return Cypher.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            polinom.Init(Cypher.Alphabet, new Mathematics.Function(txtKey.Text));
-            return polinom.Decrypt(text);
+            createNewCypher();
+            return Cypher.Decrypt(text);
         }
 
         public override void DeleteElements(StackPanel parent)
@@ -82,7 +72,7 @@ namespace Scrambler.Strategies
 
         protected override void createNewCypher()
         {
-            throw new NotImplementedException();
+            Cypher = new Cyphers.Polinom(Alphabet, new Mathematics.Function(txtKey.Text));
         }
     }
 }

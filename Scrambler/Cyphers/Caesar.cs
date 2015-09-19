@@ -7,31 +7,29 @@ using System.Windows.Controls;
 
 namespace Scrambler.Cyphers
 {
-    class Caesar: Cypher
+    class Caesar:Cypher
     {
         int key;
+        private Alphabets.Alphabet alphabet;
 
-        public Caesar(int key) :base()
+        public Caesar(int key, Alphabets.Alphabet alphabet):base()
         {
             this.key = key;
-        }
-        public Caesar()
-        {
-
+            this.alphabet = alphabet;
         }
 
         public override string Decrypt(string text)
         {
             StringBuilder result = new StringBuilder();
-            if (key > Alphabet.Quantity)
-                key = key % Alphabet.Quantity;
+            if (key > alphabet.Quantity)
+                key = key % alphabet.Quantity;
             foreach (var letter in text)
             {
-                if (Alphabet.Letters.Contains(letter))
-                    if (Alphabet.Letters.IndexOf(letter) - key < 0)
-                        result.Append(Alphabet.Letters[Alphabet.Letters.IndexOf(letter) - key + Alphabet.Quantity]);
+                if (alphabet.Letters.Contains(letter))
+                    if (alphabet.Letters.IndexOf(letter) - key < 0)
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) - key + alphabet.Quantity]);
                     else
-                        result.Append(Alphabet.Letters[Alphabet.Letters.IndexOf(letter) - key]);
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) - key]);
                 else
                     result.Append(letter);
             }
@@ -41,21 +39,20 @@ namespace Scrambler.Cyphers
         public override string Encrypt(string text)
         {
             StringBuilder result = new StringBuilder();
-            if (key > Alphabet.Quantity)
-                key = key % Alphabet.Quantity;
+            if (key > alphabet.Quantity)
+                key = key % alphabet.Quantity;
             foreach (var letter in text)
             {
-                if (Alphabet.Letters.Contains(letter))
+                if (alphabet.Letters.Contains(letter))
 
-                    if (Alphabet.Letters.IndexOf(letter) + key > Alphabet.Quantity - 1)
-                        result.Append(Alphabet.Letters[Alphabet.Letters.IndexOf(letter) + key - Alphabet.Quantity]);
+                    if (alphabet.Letters.IndexOf(letter) + key > alphabet.Quantity - 1)
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) + key - alphabet.Quantity]);
                     else
-                        result.Append(Alphabet.Letters[Alphabet.Letters.IndexOf(letter) + key]);                  
+                        result.Append(alphabet.Letters[alphabet.Letters.IndexOf(letter) + key]);                  
                 else
                     result.Append(letter);
             }
             return result.ToString();
         }
-        
     }
 }

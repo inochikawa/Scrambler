@@ -57,7 +57,7 @@ namespace Scrambler.Strategies
         {
             try
             {
-                Cypher = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text));
+                Cypher = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), Alphabet);
             }
             catch (FormatException e)
             {
@@ -74,11 +74,13 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
+            createNewCypher();
             return Cypher.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
+            createNewCypher();
             return Cypher.Decrypt(text);
         }
 

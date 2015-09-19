@@ -14,19 +14,9 @@ namespace Scrambler.Strategies
         Grid grid;
         TextBox txtKey;
         Label label;
-        Cyphers.XOREncryption XOREncryption;
 
         public XOREncryptionSt():base()
         {
-            try
-            {
-                XOREncryption = new Cyphers.XOREncryption();
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
-
             grid = new Grid();
             txtKey = new TextBox();
             txtKey.Name = "txtKey";
@@ -52,13 +42,14 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            return XOREncryption.Encrypt(text);
+            createNewCypher();
+            return Cypher.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            XOREncryption.Init(txtKey.Text, Cypher.Alphabet);
-            return XOREncryption.Decrypt(text);
+            createNewCypher();
+            return Cypher.Decrypt(text);
         }
 
         public override void DeleteElements(StackPanel parent)
@@ -68,7 +59,7 @@ namespace Scrambler.Strategies
 
         protected override void createNewCypher()
         {
-            throw new NotImplementedException();
+            Cypher = new Cyphers.XOREncryption(txtKey.Text, Alphabet);
         }
     }
 }

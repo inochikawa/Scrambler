@@ -8,37 +8,28 @@ namespace Scrambler.Cyphers
 {
     class Tritemius: Cypher
     {
-        public Alphabets.Alphabet Alphabet { get; set; }
-
         public int A { get; set; }
-
         public int B { get; set; }
-
         public int C { get; set; }
-
         public String Key { get; set; }
-
         private bool stringKey { get; set; }
+        private Alphabets.Alphabet alphabet;
 
 
-        public Tritemius()
+        public Tritemius(Alphabets.Alphabet _alphabet, int _a, int _b, int _c)
         {
-        }
-
-        public void Init(Alphabets.Alphabet _alphabet, int _a, int _b, int _c)
-        {
-            this.Alphabet = _alphabet;
-            this.A = _a;
-            this.B = _b;
-            this.C = _c;
-            this.stringKey = false;
+            alphabet = _alphabet;
+            A = _a;
+            B = _b;
+            C = _c;
+            stringKey = false;
         }
 
         public Tritemius(Alphabets.Alphabet _alphabet, String _key)
         {
-            this.Alphabet = _alphabet;
-            this.Key = _key;
-            this.stringKey = true;
+            alphabet = _alphabet;
+            Key = _key;
+            stringKey = true;
         }
 
         public override string Encrypt(String _text)
@@ -48,8 +39,8 @@ namespace Scrambler.Cyphers
             int indexInText = 1;
             foreach (char a in _text)
             {
-                cryptedText += Alphabet.Letters[NewSymbolIndex(a, indexInText)];
-                Alphabet.Letters.IndexOf(a);
+                cryptedText += alphabet.Letters[NewSymbolIndex(a, indexInText)];
+                alphabet.Letters.IndexOf(a);
                 indexInText++;
             }
             return cryptedText;
@@ -62,8 +53,8 @@ namespace Scrambler.Cyphers
             int indexInText = 1;
             foreach (char a in _cryptedText)
             {
-                decryptedText += Alphabet.Letters[OldSymbolIndex(a, indexInText)];
-                Alphabet.Letters.IndexOf(a);
+                decryptedText += alphabet.Letters[OldSymbolIndex(a, indexInText)];
+                alphabet.Letters.IndexOf(a);
                 indexInText++;
             }
             return decryptedText;
@@ -73,11 +64,11 @@ namespace Scrambler.Cyphers
             int result;
             if (!stringKey)
             {
-                result = (Alphabet.Letters.IndexOf(symbol) + ((int)Math.Pow(indexInText, 2) * A + (indexInText * B) + C)) % Alphabet.Letters.Length;
+                result = (alphabet.Letters.IndexOf(symbol) + ((int)Math.Pow(indexInText, 2) * A + (indexInText * B) + C)) % alphabet.Letters.Length;
             }
             else
             {
-                result = (Alphabet.Letters.IndexOf(symbol) + (Alphabet.Letters.IndexOf(Key[(indexInText - 1) % Key.Length]) + 1)) % Alphabet.Letters.Length;
+                result = (alphabet.Letters.IndexOf(symbol) + (alphabet.Letters.IndexOf(Key[(indexInText - 1) % Key.Length]) + 1)) % alphabet.Letters.Length;
             }
 
             return result;
@@ -88,11 +79,11 @@ namespace Scrambler.Cyphers
             int result;
             if (!stringKey)
             {
-                result = (Alphabet.Letters.IndexOf(symbol) - ((int)Math.Pow(indexInText, 2) * A + (indexInText * B) + C)) % Alphabet.Letters.Length;
+                result = (alphabet.Letters.IndexOf(symbol) - ((int)Math.Pow(indexInText, 2) * A + (indexInText * B) + C)) % alphabet.Letters.Length;
             }
             else
             {
-                result = (Alphabet.Letters.IndexOf(symbol) - (Alphabet.Letters.IndexOf(Key[(indexInText - 1) % Key.Length]) + 1)) % Alphabet.Letters.Length;
+                result = (alphabet.Letters.IndexOf(symbol) - (alphabet.Letters.IndexOf(Key[(indexInText - 1) % Key.Length]) + 1)) % alphabet.Letters.Length;
             }
             if (result >= 0)
             {
@@ -100,7 +91,7 @@ namespace Scrambler.Cyphers
             }
             else
             {
-                return Alphabet.Letters.Length - Math.Abs(result);
+                return alphabet.Letters.Length - Math.Abs(result);
             }
         }
     }

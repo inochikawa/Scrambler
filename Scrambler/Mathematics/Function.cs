@@ -28,7 +28,7 @@ namespace Scrambler.Mathematics
             }
             else
             {
-                new Function(new int[0]);
+                throw new Exception("Invalid Polynomial Expression");
             }
         }
 

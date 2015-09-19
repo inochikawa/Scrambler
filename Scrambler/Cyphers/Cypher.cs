@@ -17,6 +17,9 @@ namespace Scrambler.Cyphers
 
         public abstract string Decrypt(string text);
 
-       
+
+        public Alphabets.Alphabet Alphabet { get; set; }
+
+
     }
 }

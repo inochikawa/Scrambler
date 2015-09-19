@@ -38,6 +38,7 @@ namespace Scrambler
         {
             try
             {
+                selectedStrategy.Cypher.Alphabet = chosenAlphabet();
                 txtOut.Text = selectedStrategy.Encrypt(txtIn.Text);
             }
             catch (NullReferenceException ex)
@@ -51,6 +52,7 @@ namespace Scrambler
         {
             try
             {
+                selectedStrategy.Cypher.Alphabet = chosenAlphabet();
                 txtOut.Text = selectedStrategy.Decrypt(txtIn.Text);
             }
             catch (NullReferenceException ex)
@@ -103,7 +105,7 @@ namespace Scrambler
 
             selectedStrategy = strategyDictionary[(string)cmbCypher.SelectedItem];
             selectedStrategy.AddElements(stackPanel);
-            selectedStrategy.Alphabet = chosenAlphabet();
+            selectedStrategy.Cypher.Alphabet = chosenAlphabet();
         }
 
         private Alphabets.Alphabet chosenAlphabet()

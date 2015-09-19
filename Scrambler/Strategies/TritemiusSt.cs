@@ -77,8 +77,13 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            tritemius.Init(Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
+            tritemius.Init(Cypher.Alphabet, Convert.ToInt32(textBoxes[0].Text), Convert.ToInt32(textBoxes[1].Text), Convert.ToInt32(textBoxes[2].Text));
             return tritemius.Encrypt(text);
+        }
+
+        protected override void createNewCypher()
+        {
+            throw new NotImplementedException();
         }
     }
 }

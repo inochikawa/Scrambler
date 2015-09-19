@@ -57,7 +57,7 @@ namespace Scrambler.Strategies
 
         public override string Decrypt(string text)
         {
-            XOREncryption.Init(txtKey.Text, Alphabet);
+            XOREncryption.Init(txtKey.Text, Cypher.Alphabet);
             return XOREncryption.Decrypt(text);
         }
 
@@ -66,5 +66,9 @@ namespace Scrambler.Strategies
             parent.Children.Remove(grid);
         }
 
+        protected override void createNewCypher()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

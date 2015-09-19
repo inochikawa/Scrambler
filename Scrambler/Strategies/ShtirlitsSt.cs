@@ -34,14 +34,19 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            shtirlits.Init(Alphabet);
+            shtirlits.Init(Cypher.Alphabet);
             return shtirlits.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            shtirlits.Init(Alphabet);
+            shtirlits.Init(Cypher.Alphabet);
             return shtirlits.Decrypt(text);
+        }
+
+        protected override void createNewCypher()
+        {
+            throw new NotImplementedException();
         }
     }
 }

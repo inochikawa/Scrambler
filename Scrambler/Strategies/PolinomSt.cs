@@ -52,13 +52,13 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            polinom.Init(Alphabet, new Mathematics.Function(txtKey.Text));
+            polinom.Init(Cypher.Alphabet, new Mathematics.Function(txtKey.Text));
             return polinom.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            polinom.Init(Alphabet, new Mathematics.Function(txtKey.Text));
+            polinom.Init(Cypher.Alphabet, new Mathematics.Function(txtKey.Text));
             return polinom.Decrypt(text);
         }
 
@@ -78,6 +78,11 @@ namespace Scrambler.Strategies
             }
 
             return ind.ToArray();
+        }
+
+        protected override void createNewCypher()
+        {
+            throw new NotImplementedException();
         }
     }
 }

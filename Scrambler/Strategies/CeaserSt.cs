@@ -14,19 +14,10 @@ namespace Scrambler.Strategies
         Grid grid;
         TextBox txtKey;
         Label label;
-        Cyphers.Caesar ceaser;
+        string previousKey;
 
         public CeaserSt():base()
         {
-            try
-            {
-                ceaser = new Cyphers.Caesar();
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
-
             grid = new Grid();
             txtKey = new TextBox();
             txtKey.Name = "txtKey";
@@ -34,6 +25,8 @@ namespace Scrambler.Strategies
             txtKey.Height = 23;
             txtKey.Text = "";
             txtKey.HorizontalAlignment = HorizontalAlignment.Right;
+            txtKey.LostFocus += TxtKey_LostFocus;
+            txtKey.GotFocus += TxtKey_GotFocus;
 
             label = new Label();
             label.Name = "label";
@@ -43,9 +36,37 @@ namespace Scrambler.Strategies
 
             grid.Children.Add(txtKey);
             grid.Children.Add(label);
-
-            
         }
+
+        private void TxtKey_GotFocus(object sender, RoutedEventArgs e)
+        {
+            previousKey = txtKey.Text;
+        }
+
+        private void TxtKey_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (previousKey.Equals(txtKey.Text))
+                return;
+            else
+            {
+                KeyChange = true;
+            }
+        }
+
+        protected override void createNewCypher()
+        {
+            try
+            {
+                Cypher = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text));
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
+        }
+
+
+
         public override void AddElements(StackPanel parent)
         {
             parent.Children.Add(grid);
@@ -53,13 +74,12 @@ namespace Scrambler.Strategies
 
         public override string Encrypt(string text)
         {
-            return ceaser.Encrypt(text);
+            return Cypher.Encrypt(text);
         }
 
         public override string Decrypt(string text)
         {
-            ceaser.Init(Convert.ToInt32(txtKey.Text), Alphabet);
-            return ceaser.Decrypt(text);
+            return Cypher.Decrypt(text);
         }
 
         public override void DeleteElements(StackPanel parent)

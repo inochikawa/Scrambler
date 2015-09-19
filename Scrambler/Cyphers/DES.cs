@@ -49,7 +49,12 @@ namespace Scrambler.Cyphers
         private int[] bits;
         private int[,] separetedBits;
 
-        public DES(int textLenth)
+        public DES()
+        {
+            
+        }
+
+        public void Init(int textLenth, int key)
         {
             bits = new int[textLenth];
             int rowCount = textLenth / 64 + 1;

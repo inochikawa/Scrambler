@@ -4,14 +4,14 @@ using System.Windows.Controls;
 
 namespace Scrambler.Strategies
 {
-    [Attributes.Strategy(Type=typeof(Cyphers.Caesar))]
-    public class CeaserSt: Strategies.Strategy
+    [Attributes.Strategy(Type =typeof(Cyphers.DES))]
+    public class DESSt : Strategy
     {
         Grid grid;
         TextBox txtKey;
         Label label;
 
-        public CeaserSt():base()
+        public DESSt()
         {
             grid = new Grid();
             txtKey = new TextBox();
@@ -30,30 +30,9 @@ namespace Scrambler.Strategies
             grid.Children.Add(txtKey);
             grid.Children.Add(label);
         }
-
-        protected override void createNewCypher()
-        {
-            try
-            {
-                Cypher = new Cyphers.Caesar(Convert.ToInt32(txtKey.Text), Alphabet);
-            }
-            catch (FormatException e)
-            {
-                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
-            }
-        }
-
-
-
         public override void AddElements(StackPanel parent)
         {
             parent.Children.Add(grid);
-        }
-
-        public override string Encrypt(string text)
-        {
-            createNewCypher();
-            return Cypher.Encrypt(text);
         }
 
         public override string Decrypt(string text)
@@ -65,6 +44,24 @@ namespace Scrambler.Strategies
         public override void DeleteElements(StackPanel parent)
         {
             parent.Children.Remove(grid);
+        }
+
+        public override string Encrypt(string text)
+        {
+            createNewCypher();
+            return Cypher.Encrypt(text);
+        }
+
+        protected override void createNewCypher()
+        {
+            try
+            {
+                Cypher = new Cyphers.DES(txtKey.Text);
+            }
+            catch (FormatException e)
+            {
+                System.Windows.Forms.MessageBox.Show(e.Message, "Key is invalid!");
+            }
         }
     }
 }

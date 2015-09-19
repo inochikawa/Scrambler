@@ -1,5 +1,0 @@
-C:\Users\Maksim\Desktop\PolynomialNet\Polynomial.Net\bin\Debug\Polynomial.Net.dll
-C:\Users\Maksim\Desktop\PolynomialNet\Polynomial.Net\bin\Debug\Polynomial.Net.pdb
-C:\Users\Maksim\Desktop\PolynomialNet\Polynomial.Net\obj\Debug\Polynomial.Net.csprojResolveAssemblyReference.cache
-C:\Users\Maksim\Desktop\PolynomialNet\Polynomial.Net\obj\Debug\Polynomial.Net.dll
-C:\Users\Maksim\Desktop\PolynomialNet\Polynomial.Net\obj\Debug\Polynomial.Net.pdb

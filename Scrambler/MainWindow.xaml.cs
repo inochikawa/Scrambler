@@ -87,7 +87,18 @@ namespace Scrambler
         {
             cmbCypher.IsEnabled = true;
 
-            if (txtIn.Text == "") cmbCypher.IsEnabled = false; 
+            if (txtIn.Text == "") cmbCypher.IsEnabled = false;
+
+            inputTextLenthLabel.Content = "Text lenth: " + Mathematics.Converter.GetBitsFromString(txtIn.Text).Length;
+
+            //int[] a = Mathematics.Converter.GetBitsFromString(txtIn.Text);
+            //StringBuilder sb = new StringBuilder();
+            //foreach (var item in a)
+            //{
+            //    sb.Append(item);
+            //}
+
+            //txtOut.Text = sb.ToString();
         }
 
         private void AlphabetsMenuItem_Click(object sender, RoutedEventArgs e)
@@ -111,6 +122,11 @@ namespace Scrambler
                 if (item.Chosen)
                     return item;
             return null;
+        }
+
+        private void txtOut_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            //txtIn.Text = Mathematics.Converter.GetStringFromBits(txtOut.Text);
         }
     }
 }

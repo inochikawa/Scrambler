@@ -5,7 +5,7 @@ using System.Windows.Controls;
 namespace Scrambler.Strategies
 {
     [Attributes.Strategy(Type=typeof(Cyphers.Caesar))]
-    public class CeaserSt: Strategies.Strategy
+    public class CeaserSt: Strategy
     {
         Grid grid;
         TextBox txtKey;

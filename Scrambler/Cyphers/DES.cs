@@ -68,7 +68,10 @@ namespace Scrambler.Cyphers
 
         #endregion
 
-        private readonly int[] keyShifts = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
+        private readonly int[,] keyShifts = { { 1,  1,  2,  2,  2,  2,  2,  2,  1,  2,  2,  2,  2,  2,  2,  1 },
+                                              {-1, -1, -2, -2, -2, -2, -2, -2, -1, -2, -2, -2, -2, -2, -2, -1 },};
+
+        private const int roundIteration = 1;
 
         #region S-blocks
 
@@ -121,22 +124,40 @@ namespace Scrambler.Cyphers
         {
             this.inputKey = key;
         }
-        
-        private void allocateFreeSpaceForBits(int[,] inputBits, int messageLenth)
-        {
-            int rowCount = messageLenth / 64 + 1;
-            inputBits = new int[rowCount, 64];
-        }
-        
+              
         public override string Decrypt(string text)
         {
-            throw new NotImplementedException();
+            StringBuilder result = new StringBuilder();
+            List<int> bits = new List<int>();
+            foreach (var bit in text)
+            {
+                bits.Add(bit-48);
+            }
+            int[,] separatedBits = separateBits(bits.ToArray());
+            for (int i = 0; i < separatedBits.GetLength(0); i++)
+            {
+                int[] tempBits = new int[separatedBits.GetLength(1)];
+                for (int j = 0; j < tempBits.Length; j++)
+                {
+                    tempBits[j] = separatedBits[i, j];
+                }
+                tempBits = initialPermutation(tempBits);
+                tempBits = inverceDESRoundes(tempBits);
+                tempBits = finalPermutation(tempBits);
+                for (int j = 0; j < tempBits.Length; j++)
+                {
+                    result.Append(tempBits[j]);
+                }
+            }
+
+            return Mathematics.Converter.GetStringFromBits(result.ToString());
         }
 
         public override string Encrypt(string text)
         {
             StringBuilder result = new StringBuilder();
-            int[,] separatedBits = separateBits(getBits(text));
+            string expansionText = additionalWhitespaces(text);
+            int[,] separatedBits = separateBits(getBits(expansionText));
             for (int i = 0; i < separatedBits.GetLength(0); i++)
             {
                 int[] tempBits = new int[separatedBits.GetLength(1)];
@@ -152,18 +173,23 @@ namespace Scrambler.Cyphers
                     result.Append(tempBits[j]);
                 }
             }
-            
-            return binaryToString(result.ToString());
+
+            return result.ToString();
+        }
+
+        private string additionalWhitespaces(string text)
+        {
+            StringBuilder result = new StringBuilder(text);
+            while(getBits(result.ToString()).Length % 64 != 0)
+            {
+                result.Append(" ");
+            }
+            return result.ToString();
         }
 
         public static string binaryToString(string data)
         {
-            List<Byte> byteList = new List<Byte>();
-
-            for (int i = 0; i < data.Length; i += 8)
-            {
-                byteList.Add(Convert.ToByte(data.Substring(i, 8), 2));
-            }
+            List<Byte> byteList = new List<Byte>(Encoding.ASCII.GetBytes(data));
             return Encoding.ASCII.GetString(byteList.ToArray());
         }
 
@@ -175,17 +201,23 @@ namespace Scrambler.Cyphers
             {
                 sb.Append(Convert.ToString(c, 2).PadLeft(8, '0'));
             }
+
             List<int> result = new List<int>();
             foreach (var letter in sb.ToString())
             {
-                result.Add(letter-48);
+                result.Add(letter - 48);
             }
             return result.ToArray();
         }
 
         private int[,] separateBits(int[] bits)
         {
-            int[,] separetedBits = new int[bits.Length / 64 + 1, 64];
+            int rowCount = 0;
+            if (bits.Length % 64 == 0)
+                rowCount = bits.Length / 64;
+            else
+                rowCount = bits.Length / 64 + 1;
+            int[,] separetedBits = new int[rowCount, 64];
             int bitsCount = 0;
             for (int i = 0; i < separetedBits.GetLength(0); i++)
             {
@@ -221,13 +253,29 @@ namespace Scrambler.Cyphers
             return resultBits;
         }
 
+        private List<int[]> keyVariants()
+        {
+            List<int[]> keys = new List<int[]>();
+            int[] tempKey = key(inputKey);
+            int[] resultKey = new int[48];
+
+            for (int cycl = 0; cycl < roundIteration; cycl++)
+            {
+                tempKey = keyShift(tempKey, cycl, 0);
+                resultKey = keyPermutation(tempKey);
+                keys.Add(resultKey);
+            }
+            return keys;
+        }
+
         private int[] DESRoundes(int[] bits)
         {
             int[] tempL = new int[32];
             int[] tempR = new int[32];
 
             int[] resultL = new int[32];
-            int[] resultR = new int[32];     
+            int[] resultR = new int[32];
+            int[] resultKey = new int[48];
 
             for (int i = 0; i < bits.Length; i++)
             {
@@ -237,13 +285,15 @@ namespace Scrambler.Cyphers
                     tempR[i-32] = bits[i];
             }
 
-            for (int cycl = 0; cycl < 16; cycl++)
+            for (int cycl = 0; cycl < roundIteration; cycl++)
             {
+                resultKey = keyVariants()[cycl];
+
                 resultL = tempR;
                 
                 for (int i = 0; i < 32; i++)
                 {
-                    resultR[i] = tempL[i] + cryptoFunction(tempR, key(inputKey, cycl))[i];
+                    resultR[i] = tempL[i] + cryptoFunction(tempR, resultKey)[i];
                     if (resultR[i] > 1)
                         resultR[i] = 0;
                 }
@@ -263,7 +313,53 @@ namespace Scrambler.Cyphers
 
             return result;
         }
-        
+
+        private int[] inverceDESRoundes(int[] bits)
+        {
+            int[] tempL = new int[32];
+            int[] tempR = new int[32];
+
+            int[] resultL = new int[32];
+            int[] resultR = new int[32];
+            int[] resultKey = new int[48];
+
+            for (int i = 0; i < bits.Length; i++)
+            {
+                if (i < 32)
+                    tempL[i] = bits[i];
+                else
+                    tempR[i - 32] = bits[i];
+            }
+
+            for (int cycl = roundIteration-1; cycl > -1; cycl--)
+            {
+                resultKey = keyVariants()[cycl];
+
+                resultR = tempL;
+
+                for (int i = 0; i < 32; i++)
+                {
+                    resultL[i] = tempR[i] + cryptoFunction(tempL, resultKey)[i];
+                    if (resultL[i] > 1)
+                        resultL[i] = 0;
+                }
+
+                tempL = resultL;
+                tempR = resultR;
+            }
+
+            int[] result = new int[64];
+            for (int i = 0; i < 64; i++)
+            {
+                if (i < 32)
+                    result[i] = resultL[i];
+                else
+                    result[i] = resultR[i - 32];
+            }
+
+            return result;
+        }
+
         private int[] cryptoFunction(int[] R, int[] key)
         {
             int[] expansionR = new int[48];
@@ -326,39 +422,87 @@ namespace Scrambler.Cyphers
             }
             return result;
         }
-
-        private int[] key(string keyString, int keyNumber)
+        
+        private int[] key(string keyString)
         {
             int[] keyBits = getBits(keyString);
-            if(keyBits.Length != 64)
+            if (keyBits.Length != 64)
             {
-                return new int[48];
+                return new int[56];
             }
             else
             {
                 int[] ipKey = new int[56];
                 for (int i = 0; i < 56; i++)
                 {
-                    ipKey[i] = keyBits[ipKeyTable[i]-1];
+                    ipKey[i] = keyBits[ipKeyTable[i] - 1];
                 }
-
-                for (int i = 0; i < 56; i++)
-                {
-                    if (i + keyShifts[keyNumber] > ipKey.Length - 1)
-                    {
-                        ipKey[i] = ipKey[i + keyShifts[keyNumber] - ipKey.Length];
-                    }
-                    else
-                        ipKey[i] = ipKey[i + keyShifts[keyNumber]];
-                }
-                int[] keyResult = new int[48];
-                for (int i = 0; i < 48; i++)
-                {
-                    keyResult[i] = ipKey[sublKeyPermutation[i]-1];
-                }
-
-                return keyResult;
+                
+                return ipKey;
             }
         }
+
+        private int[] keyShift(int[] key, int keyNumber, int encrypt)
+        {
+            int[] C = new int[28];
+            int[] D = new int[28];
+
+            for (int i = 0; i < 56; i++)
+            {
+                if (i < 28)
+                    C[i] = key[i];
+                else
+                    D[i-28] = key[i];
+            }
+            //shift C-box
+            for (int i = 0; i < 28; i++)
+            {
+                if (i + keyShifts[encrypt, keyNumber] > C.Length - 1)
+                {
+                    C[i] = C[i + keyShifts[encrypt, keyNumber] - C.Length];
+                }
+                else if (i + keyShifts[encrypt, keyNumber] < 0)
+                {
+                    C[i] = C[i + keyShifts[encrypt, keyNumber] + C.Length];
+                }
+                else
+                    C[i] = C[i + keyShifts[encrypt, keyNumber]];
+            }
+            //shift D-box
+            for (int i = 0; i < 28; i++)
+            {
+                if (i + keyShifts[encrypt, keyNumber] > D.Length - 1)
+                {
+                    D[i] = D[i + keyShifts[encrypt, keyNumber] - D.Length];
+                }
+                else if (i + keyShifts[encrypt, keyNumber] < 0)
+                {
+                    D[i] = D[i + keyShifts[encrypt, keyNumber] + D.Length];
+                }
+                else
+                    D[i] = D[i + keyShifts[encrypt, keyNumber]];
+            }
+            int[] result = new int[56];
+            for (int i = 0; i < 56; i++)
+            {
+                if (i < 28)
+                    result[i] = C[i];
+                else
+                    result[i] = D[i-28];
+            }
+            return result;
+        }
+
+        private int[] keyPermutation(int[] key)
+        {
+            int[] keyResult = new int[48];
+            for (int i = 0; i < 48; i++)
+            {
+                keyResult[i] = key[sublKeyPermutation[i] - 1];
+            }
+
+            return keyResult;
+        }
     }
+    
 }

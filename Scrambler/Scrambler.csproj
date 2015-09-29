@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,14 +61,18 @@
     <Compile Include="Cyphers\Cypher.cs" />
     <Compile Include="Cyphers\DES.cs" />
     <Compile Include="Cyphers\Polinom.cs" />
+    <Compile Include="Cyphers\RSA.cs" />
     <Compile Include="Cyphers\Shtirlits.cs" />
     <Compile Include="Cyphers\Tritemius.cs" />
     <Compile Include="Cyphers\XOREncryption.cs" />
+    <Compile Include="Mathematics\Converter.cs" />
     <Compile Include="Mathematics\Function.cs" />
     <Compile Include="Mathematics\Member.cs" />
+    <Compile Include="Mathematics\ModularExponentiation.cs" />
     <Compile Include="Strategies\CeaserSt.cs" />
     <Compile Include="Strategies\DESSt.cs" />
     <Compile Include="Strategies\PolinomSt.cs" />
+    <Compile Include="Strategies\RsaSt.cs" />
     <Compile Include="Strategies\ShtirlitsSt.cs" />
     <Compile Include="Strategies\Strategy.cs" />
     <Compile Include="Strategies\TritemiusSt.cs" />

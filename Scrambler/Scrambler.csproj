@@ -60,6 +60,8 @@
     <Compile Include="Cyphers\Caesar.cs" />
     <Compile Include="Cyphers\Cypher.cs" />
     <Compile Include="Cyphers\DES.cs" />
+    <Compile Include="Cyphers\DiffiHellmana.cs" />
+    <Compile Include="Cyphers\ElHamal.cs" />
     <Compile Include="Cyphers\Polinom.cs" />
     <Compile Include="Cyphers\RSA.cs" />
     <Compile Include="Cyphers\Shtirlits.cs" />
@@ -69,8 +71,11 @@
     <Compile Include="Mathematics\Function.cs" />
     <Compile Include="Mathematics\Member.cs" />
     <Compile Include="Mathematics\ModularExponentiation.cs" />
+    <Compile Include="Mathematics\PrimeNumbers.cs" />
     <Compile Include="Strategies\CeaserSt.cs" />
     <Compile Include="Strategies\DESSt.cs" />
+    <Compile Include="Strategies\ElHamalSt.cs" />
+    <Compile Include="Strategies\DiffiHellmanaSt.cs" />
     <Compile Include="Strategies\PolinomSt.cs" />
     <Compile Include="Strategies\RsaSt.cs" />
     <Compile Include="Strategies\ShtirlitsSt.cs" />
@@ -79,6 +84,10 @@
     <Compile Include="Strategies\XOREncryptionSt.cs" />
     <Compile Include="ViewModel\AlphabetsWindowVM.cs" />
     <Compile Include="View\AirWindow.cs" />
+    <Page Include="View\FlatWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\Windows\AlphabetsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="View\FlatWindow.cs" />
     <Compile Include="View\Windows\AlphabetsWindow.xaml.cs">
       <DependentUpon>AlphabetsWindow.xaml</DependentUpon>
     </Compile>

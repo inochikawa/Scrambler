@@ -68,11 +68,11 @@ namespace Scrambler.Cyphers
 
         private void generateKeys()
         {
-            p = primeNumber();
-            q = primeNumber();
+            p = Mathematics.PrimeNumbers.GetPrime();
+            q = Mathematics.PrimeNumbers.GetPrime();
             n = p * q;
             eulerFunc = (p - 1) * (q - 1);
-            e = relativelyPrimeNumber(eulerFunc);
+            e = Mathematics.PrimeNumbers.RelativelyPrimeNumber(eulerFunc);
             Random random = new Random();
             d = 0;
             while ((e * d) % eulerFunc != 1)
@@ -94,62 +94,6 @@ namespace Scrambler.Cyphers
                 d++;
             PublicKey = new int[2] { e, n };
             privateKey = new int[2] { d, n };
-        }
-
-        private int primeNumber()
-        {
-            int number = new Random().Next(0, 2056);
-            while(!isPrime(number))
-            {
-                number++;
-            }
-            return number;
-        }
-
-        private bool isPrime(int number)
-        {
-            if (number < 2) return false;
-            for (int i = 2; i <= Math.Sqrt(number); i++)
-            {
-                if (number % i == 0) return false;
-            }
-            return true;
-        }
-
-        private bool isRelativelyPrimeNumber(int number1, int number2)
-        {
-            int maxNumber = number1;
-            if (number2 > number1)
-                maxNumber = number2;
-            for (int i = 2; i <= maxNumber; i++)
-            {
-                if (number1 % i == 0 && number2 % i == 0) return false;
-            }
-            return true;
-        }
-
-        private int relativelyPrimeNumber(int number)
-        {
-            Random random = new Random();
-            int resultNum = 0;
-            while(true)
-            {
-                resultNum++;
-                if (!isPrime(resultNum))
-                    continue;
-                if (isRelativelyPrimeNumber(resultNum, number))
-                    break;                
-            }
-            return resultNum;
-        }
-
-        private IEnumerable<int> nextPrimeNumber()
-        {
-            for (int i = 0; i < 10000; i++)
-            {
-                if (isPrime(i))
-                    yield return i;
-            }
         }
     }
 }

@@ -8,6 +8,7 @@
                 <ResourceDictionary Source="View/AnimationEffects.xaml"/>
                 <ResourceDictionary Source="View/GlassButton.xaml"/>
                 <ResourceDictionary Source="View/AirWindow.xaml"/>
+                <ResourceDictionary Source="View/FlatWindow.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

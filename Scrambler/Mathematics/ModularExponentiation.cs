@@ -34,5 +34,22 @@ namespace Scrambler.Mathematics
 
             return (int) resultIteration.Last();
         }
+
+        public static int RaisedToThePowerModulo(int basis, int power, int module)
+        {
+            int[] powerBits = Mathematics.Converter.GetBitsFromInt(power);
+            List<BigInteger> resultIteration = new List<BigInteger>() { basis };
+
+            for (int i = 0; i < powerBits.Length; i++)
+            {
+                if (i + 1 != powerBits.Length)
+                    if (powerBits[i + 1] == 0)
+                        resultIteration.Add(BigInteger.Pow(resultIteration[i], 2) % module);
+                    else
+                        resultIteration.Add((BigInteger.Pow(resultIteration[i], 2) * basis) % module);
+            }
+
+            return (int)resultIteration.Last();
+        }
     }
 }

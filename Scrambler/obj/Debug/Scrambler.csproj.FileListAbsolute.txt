@@ -20,3 +20,5 @@ D:\3 курс\1 семестр\Комп крипт\Scrambler\Scrambler\obj\Debug
 D:\3 курс\1 семестр\Комп крипт\Scrambler\Scrambler\obj\Debug\Scrambler.csproj.GenerateResource.Cache
 D:\3 курс\1 семестр\Комп крипт\Scrambler\Scrambler\obj\Debug\Scrambler.exe
 D:\3 курс\1 семестр\Комп крипт\Scrambler\Scrambler\obj\Debug\Scrambler.pdb
+D:\3 курс\1 семестр\Комп крипт\Scrambler\Scrambler\obj\Debug\View\FlatWindow.baml
+D:\3 курс\1 семестр\Комп крипт\Scrambler\Scrambler\obj\Debug\View\FlatWindow.g.cs

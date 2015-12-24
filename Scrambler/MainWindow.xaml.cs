@@ -89,7 +89,7 @@ namespace Scrambler
 
             if (txtIn.Text == "") cmbCypher.IsEnabled = false;
 
-            inputTextLenthLabel.Content = "Text lenth: " + Mathematics.Converter.GetBitsFromString(txtIn.Text).Length;
+            inputTextLenthLabel.Content = "Text lenth: " + Mathematics.Converter.ToBits(txtIn.Text).Length;
 
             //int[] a = Mathematics.Converter.GetBitsFromString(txtIn.Text);
             //StringBuilder sb = new StringBuilder();

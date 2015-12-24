@@ -5,15 +5,15 @@ using System.Windows.Media;
 
 namespace Scrambler.Strategies
 {
-    [Attributes.Strategy(Type =typeof(Cyphers.DES))]
-    public class DESSt : Strategy
+    [Attributes.Strategy(Type=typeof(Cyphers.Blowfish))]
+    public class BlowfishSt : Strategy
     {
         Grid grid;
         TextBox txtKey;
         Label label;
         Label labelKeySize;
 
-        public DESSt()
+        public BlowfishSt()
         {
             grid = new Grid();
             txtKey = new TextBox();
@@ -44,7 +44,8 @@ namespace Scrambler.Strategies
         private void TxtKey_TextChanged(object sender, TextChangedEventArgs e)
         {
             labelKeySize.Content = "Key size: " + Mathematics.Converter.ToBits(txtKey.Text).Length;
-            if (Mathematics.Converter.ToBits(txtKey.Text).Length != 64)
+            int txtSize = Mathematics.Converter.ToBits(txtKey.Text).Length;
+            if (txtSize < 32 && txtSize > 448)
                 txtKey.Foreground = Brushes.Red;
             else
                 txtKey.Foreground = Brushes.Green;
@@ -58,7 +59,6 @@ namespace Scrambler.Strategies
 
         public override string Decrypt(string text)
         {
-            createNewCypher();
             return Cypher.Decrypt(text);
         }
 
@@ -78,7 +78,7 @@ namespace Scrambler.Strategies
         {
             try
             {
-                Cypher = new Cyphers.DES(txtKey.Text);
+                Cypher = new Cyphers.Blowfish(txtKey.Text);
             }
             catch (FormatException e)
             {

@@ -20,16 +20,16 @@ namespace Scrambler.Mathematics
 
         public int RaisedToThePowerModulo()
         {
-            int[] powerBits = Mathematics.Converter.GetBitsFromInt(power);
-            List<BigInteger> resultIteration = new List<BigInteger>() { basis };
+            int[] powerBits = Mathematics.Converter.ToBits(power);
+            List<System.Numerics.BigInteger> resultIteration = new List<System.Numerics.BigInteger>() { basis };
 
             for (int i = 0; i < powerBits.Length; i++)
             {
                 if(i + 1 != powerBits.Length)
                     if (powerBits[i + 1] == 0)
-                        resultIteration.Add(BigInteger.Pow(resultIteration[i], 2) % module);
+                        resultIteration.Add(System.Numerics.BigInteger.Pow(resultIteration[i], 2) % module);
                     else
-                        resultIteration.Add((BigInteger.Pow(resultIteration[i], 2) * basis) % module);
+                        resultIteration.Add((System.Numerics.BigInteger.Pow(resultIteration[i], 2) * basis) % module);
             }
 
             return (int) resultIteration.Last();
@@ -37,16 +37,16 @@ namespace Scrambler.Mathematics
 
         public static int RaisedToThePowerModulo(int basis, int power, int module)
         {
-            int[] powerBits = Mathematics.Converter.GetBitsFromInt(power);
-            List<BigInteger> resultIteration = new List<BigInteger>() { basis };
+            int[] powerBits = Mathematics.Converter.ToBits(power);
+            List<System.Numerics.BigInteger> resultIteration = new List<System.Numerics.BigInteger>() { basis };
 
             for (int i = 0; i < powerBits.Length; i++)
             {
                 if (i + 1 != powerBits.Length)
                     if (powerBits[i + 1] == 0)
-                        resultIteration.Add(BigInteger.Pow(resultIteration[i], 2) % module);
+                        resultIteration.Add(System.Numerics.BigInteger.Pow(resultIteration[i], 2) % module);
                     else
-                        resultIteration.Add((BigInteger.Pow(resultIteration[i], 2) * basis) % module);
+                        resultIteration.Add((System.Numerics.BigInteger.Pow(resultIteration[i], 2) * basis) % module);
             }
 
             return (int)resultIteration.Last();
